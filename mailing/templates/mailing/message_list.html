@@ -1,0 +1,33 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<div class="row mb-4">
+  <div class="col-12">
+       <a class="btn btn-outline-primary" href="{% url 'mailing:message_create' %}">Добавить cообщение</a>
+  </div>
+</div>
+<div class="container">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Номер</th>
+      <th scope="col">Тема</th>
+      <th scope="col">Управление</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list%}
+    <tr>
+      <td>{{ object.pk }}</td>
+      <td>{{ object.header }}</td>
+      <td>
+        <a href="{% url 'mailing:message_update' object.pk %}" type="button" class="btn btn-sm btn-outline-primary">Редактировать</a>
+        <a href="{% url 'mailing:message_delete' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+</div>
+{% endblock %}

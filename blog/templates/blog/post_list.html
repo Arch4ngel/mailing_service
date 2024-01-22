@@ -1,0 +1,43 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+{% block content %}
+<style>
+  .size {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;}
+</style>
+<div class="row mb-4">
+  <div class="col-12">
+       <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить пост</a>
+  </div>
+</div>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    {% for object in object_list%}
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">{{ object.title }}</h4>
+        </div>
+        <img src="/{% mediapath object.image %}"/>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="size"> {{ object.body }}</li>
+          </ul>
+          <h6 class="my-3 font-weight-normal"> Просмотры:{{ object.views_count }}</h6>
+          <a href="{% url 'blog:view' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Просмотр</a>
+          <a href="{% url 'blog:edit' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+          <a href="{% url 'blog:delete' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% include 'includes/pagination.html' %}
+</div>
+{% endblock %}

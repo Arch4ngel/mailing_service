@@ -1,0 +1,19 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+{% block content %}
+<h6>{{category}}</h6>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="/{% mediapath object.image %}" width="400" height="400">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h6 class="card-title pricing-card-title">Просмотры:{{ object.views_count }}</h6>
+            {{ object.body }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="text-center container">
+    <div class="col-12">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <p>Вы действительно хотите удалить: "{{ object }}"?</p>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Удалить</button>
+                        <a type="button" href="{% url 'mailing:client_list' %}" class="btn btn-lg btn-block btn-outline-primary">Отменить</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
